@@ -14,59 +14,79 @@
   <main>
     <p class="last-updated">Last updated: February 2025</p>
 
-    <p>This Privacy Policy describes how the Mafia app ("we", "our", or "the app") handles information when you use our application on your device. We are committed to protecting your privacy and complying with applicable data protection laws and platform requirements (including Google Play and Apple App Store).</p>
+    <p>This Privacy Policy describes how the Mafia app ("we", "our", or "the app") collects, uses, stores, and protects information when you use our application. The app is a pass-the-phone host tool for the Mafia / Werewolf social deduction game: one device, one host, players take turns with the phone. We are committed to protecting your privacy and complying with applicable data protection laws and platform requirements (Google Play and Apple App Store).</p>
 
-    <h2>1. Information We Collect</h2>
-    <p>We may collect or process the following categories of information:</p>
+    <h2>1. Overview of the App and Data Flow</h2>
+    <p>The app works in an offline-first way: most data you create (game setups, player names, presets, game history, settings) is stored only on your device. If you sign in with Google or Apple and choose to sync when switching from guest to account, we upload your game history to the cloud (Firebase Firestore) so you can access it from other devices. We do not sell your personal information. We do not use your in-app data for advertising or profiling.</p>
+
+    <h2>2. Information We Collect and Process</h2>
+
+    <h3>2.1 Account and sign-in</h3>
     <ul>
-      <li><strong>Account information:</strong> If you sign in with Google or Apple, we receive the identifier and basic profile data (e.g. email, display name) that the provider shares with us, in accordance with your sign-in choices.</li>
-      <li><strong>Usage and diagnostics:</strong> We may collect anonymous or aggregated usage data and crash reports to improve the app and fix issues (e.g. via Firebase or similar services).</li>
-      <li><strong>Data you create in the app:</strong> Game setups, player names, presets, and similar in-app data are stored primarily on your device. If you use optional cloud or sync features, that data may be stored on our or our providers' servers to provide those features.</li>
+      <li><strong>Guest mode:</strong> You can use the app without an account. No account identifier is collected; all data stays on your device.</li>
+      <li><strong>Google Sign-In (Android and iOS):</strong> When you choose "Continue with Google", we use Google's OAuth to authenticate you. We receive and use a Firebase Auth user identifier (UID) to associate your cloud data (e.g. game history) with your account. Google may share profile data (e.g. email, display name) with the app depending on your Google account and consent; we use the UID as the primary link to your data in our backend.</li>
+      <li><strong>Sign in with Apple (iOS only):</strong> When you choose Sign in with Apple, we receive an Apple credential and create a Firebase Auth account. We do not store or link your Apple email (including Hide My Email relay addresses) for identification. We use only the Firebase UID to associate your cloud data with your account, in line with Apple's Sign in with Apple and anonymized-data requirements.</li>
     </ul>
 
-    <h2>2. How We Use Your Information</h2>
-    <p>We use the information we collect to:</p>
+    <h3>2.2 Data stored on your device (local storage)</h3>
+    <p>We use local storage (Hive) on your device for the following. This data does not leave your device unless you sign in and choose to sync (see 2.3).</p>
     <ul>
-      <li>Provide, operate, and improve the Mafia app and its features.</li>
-      <li>Authenticate you when you use sign-in (Google/Apple).</li>
-      <li>Sync your data across devices when you use optional sync or cloud features.</li>
-      <li>Analyze usage and diagnose problems in an aggregated or anonymized way.</li>
-      <li>Comply with legal obligations and enforce our terms.</li>
+      <li><strong>Presets:</strong> Saved game setups (e.g. role lists, player counts) that you create or load.</li>
+      <li><strong>Statistics / game history:</strong> Summaries of finished games (up to 200 stored locally), including: date and time of the game, winner or outcome text, number of players, number of rounds, and for each player — the name you entered, assigned role, team, and whether they were eliminated (and if so, whether by vote or night kill, and in which round). This is the same structure used for cloud sync when you have an account.</li>
+      <li><strong>Groups:</strong> Group name, expected player count, preset role configuration, and optional pre-filled player names; used for organizing games (e.g. "Friday group") and locking the lobby when a game starts.</li>
+      <li><strong>Crash recovery / game state:</strong> So you can resume if the app closes during a game, we save the current game state: phase (e.g. night, day, voting, role reveal), list of players (id, name, role, status, seating order), round index, night/day actions (e.g. who was eliminated, witch save/poison used, vigilante kills used), optional host passcode for "Reveal all roles", and elimination history. This is overwritten each time the phase changes and is only used to restore the session on the same device.</li>
+      <li><strong>Settings:</strong> Your preferences, including: theme (e.g. dark/light), auto-hide duration, whether to reveal role on death, role-level rules (e.g. doctor can save self, mafia/werewolf must kill, tie behavior, discussion timer, secret voting, first night no kill, seer sees exact role), confirm destructive actions, dramatic role reveal, and sound on/off.</li>
+      <li><strong>Wheel participants:</strong> Names or identifiers you enter for the "wheel of fortune" feature (e.g. to randomly choose the host).</li>
     </ul>
 
-    <h2>3. Data Storage and Security</h2>
-    <p>We store data on your device and, where you use them, on secure servers operated by us or our service providers (e.g. Firebase). We use reasonable technical and organizational measures to protect your data; we cannot guarantee absolute security of data transmitted over the internet or stored on any system.</p>
+    <h3>2.3 Data stored in the cloud (when you have an account and sync)</h3>
+    <p>If you sign in with Google or Apple and, when switching from guest to account, you choose to sync your data, we upload your <strong>game history</strong> to Firebase Firestore. The cloud data is stored under your Firebase user ID in the path <code>users/{userId}/game_history</code>. Each stored game summary includes: a unique id, played-at timestamp, winner/outcome text, player count, rounds played, and for each player — player name, role name, role id, team name, whether eliminated, and if applicable elimination label (e.g. "Day 2 (voted out)"; and an elimination recap (round index, voted vs night kill, labels, player and role names). We do not currently sync presets, groups, or settings to the cloud; only game history is synced. You can sign out at any time; your local data remains until you clear it or uninstall. We do not use your game history for advertising or to build profiles about you.</p>
 
-    <h2>4. Third-Party Services</h2>
-    <p>The app may use third-party services that process data on our behalf, including:</p>
+    <h3>2.4 Data we do not collect</h3>
+    <p>We do not collect or process: precise location; contacts; photos or media from your device; health or biometric data; or any data for third-party advertising or cross-app tracking. The app does not include analytics or crash-reporting SDKs that send identifiable data to us or third parties; unhandled errors may be reported to the Flutter framework on device, and we do not receive those reports unless we add a separate crash service later (which we would disclose in an updated policy).</p>
+
+    <h2>3. How We Use Your Information</h2>
     <ul>
-      <li><strong>Google (Firebase, Google Sign-In):</strong> Authentication, analytics, and cloud services. Their privacy policy applies to data they process: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a>.</li>
-      <li><strong>Apple (Sign in with Apple):</strong> Authentication. Apple's privacy policy applies: <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">Apple Privacy Policy</a>.</li>
-      <li><strong>In-app purchase providers (Google Play, App Store):</strong> For premium or in-app purchases, the respective store's terms and privacy policies apply to payment and purchase data.</li>
+      <li>To provide the app: run games, save and load presets and groups, show game history and statistics, and restore the current game after a crash or restart.</li>
+      <li>To authenticate you when you use Google or Apple sign-in and to associate your cloud game history with your account when you choose to sync.</li>
+      <li>To sync game history to Firestore when you have an account and have chosen to upload local data (e.g. when migrating from guest to account).</li>
+      <li>To apply your settings (theme, sound, game rules) and to respect your choices (e.g. not syncing: we clear local data only if you explicitly choose "No" when asked to sync after signing in).</li>
+      <li>To comply with legal obligations and to enforce our Terms of Use.</li>
+    </ul>
+
+    <h2>4. Data Retention and Deletion</h2>
+    <p><strong>On device:</strong> Data remains until you clear it (e.g. via in-app "clear data" if offered when signing out or switching account), or until you uninstall the app. Game history is capped at 200 summaries locally; older entries are trimmed when new ones are added.</p>
+    <p><strong>In the cloud:</strong> Game history stored in Firestore remains until you ask us to delete it or we delete your account. To request deletion of your cloud data or account, contact us at the email below. We will process your request in line with applicable law.</p>
+
+    <h2>5. Data Storage and Security</h2>
+    <p>Local data is stored on your device using the app's private storage (Hive). Cloud data is stored in Google Firebase Firestore; access is restricted to your user ID. We rely on Firebase and your device OS for security. We use reasonable measures to protect data; we cannot guarantee absolute security of data transmitted over the internet or stored on any system.</p>
+
+    <h2>6. Third-Party Services</h2>
+    <p>The app uses the following third-party services that may process data:</p>
+    <ul>
+      <li><strong>Google Firebase (Firebase Auth, Cloud Firestore):</strong> Authentication and cloud storage of game history when you are signed in and have synced. Data is processed according to Google's policies. <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a>.</li>
+      <li><strong>Google Sign-In:</strong> Used to sign you in; Google may provide profile information per your consent. <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a>.</li>
+      <li><strong>Apple (Sign in with Apple):</strong> Used on iOS to sign you in. We do not store or use your Apple email for identification. <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">Apple Privacy Policy</a>.</li>
+      <li><strong>Google Play / Apple App Store:</strong> For in-app purchases (e.g. premium features), payment and purchase data are processed by the store. Refunds and purchase history are subject to the store's terms and privacy policies.</li>
+      <li><strong>Audio:</strong> The app plays sound effects from assets bundled in the app (e.g. via just_audio). Playback is local only; no audio is sent to us or third parties.</li>
     </ul>
     <p>We do not sell your personal information to third parties.</p>
 
-    <h2>5. Your Rights and Choices</h2>
-    <p>Depending on your region, you may have the right to:</p>
-    <ul>
-      <li>Access the personal data we hold about you.</li>
-      <li>Request correction or deletion of your data.</li>
-      <li>Object to or restrict certain processing.</li>
-      <li>Data portability where applicable.</li>
-    </ul>
-    <p>You can manage sign-in and many in-app settings (including sync) from within the app. To exercise other rights or ask questions, contact us using the details in the "Contact" section below.</p>
+    <h2>7. Your Rights and Choices</h2>
+    <p>Depending on your region, you may have the right to: access the personal data we hold about you; request correction or deletion; object to or restrict certain processing; and data portability where applicable.</p>
+    <p>You can: use the app as a guest (no account); sign in with Google or Apple; when switching from guest to account, choose whether to sync local data (upload) or clear it and start fresh; sign out at any time; and manage in-app settings (e.g. sound, theme). To request access, correction, deletion of cloud data, or to exercise other privacy rights, contact us at the email below. We will respond in line with applicable law.</p>
 
-    <h2>6. Children's Privacy</h2>
-    <p>Our app is not directed at children under 13 (or the applicable age in your jurisdiction). We do not knowingly collect personal information from children. If you believe we have collected such information, please contact us so we can delete it.</p>
+    <h2>8. Children's Privacy</h2>
+    <p>The app is not directed at children under 13 (or the applicable age in your jurisdiction). We do not knowingly collect personal information from children. If you believe we have collected such information, please contact us so we can delete it.</p>
 
-    <h2>7. International Transfers</h2>
-    <p>Your data may be processed in countries other than your own. We ensure appropriate safeguards (e.g. standard contractual clauses or equivalent) where required by law.</p>
+    <h2>9. International Transfers</h2>
+    <p>Your data may be processed in countries other than your own (e.g. Firebase may store data in regions chosen by the project). Where required by law, we ensure appropriate safeguards (e.g. standard contractual clauses or equivalent).</p>
 
-    <h2>8. Changes to This Policy</h2>
-    <p>We may update this Privacy Policy from time to time. We will post the updated version on this page and update the "Last updated" date. Continued use of the app after changes constitutes acceptance of the updated policy where permitted by law.</p>
+    <h2>10. Changes to This Policy</h2>
+    <p>We may update this Privacy Policy from time to time. We will post the updated version on this page and update the "Last updated" date. Continued use of the app after changes constitutes acceptance of the updated policy where permitted by law. For material changes, we may provide additional notice (e.g. in the app or by email where available).</p>
 
-    <h2>9. Contact</h2>
-    <p>For privacy-related questions, requests, or complaints, please contact us at:</p>
+    <h2>11. Contact</h2>
+    <p>For privacy-related questions, requests, or complaints:</p>
     <p><strong>Email:</strong> <a href="mailto:vaghblogger@gmail.com">vaghblogger@gmail.com</a></p>
 
     <nav class="links">
