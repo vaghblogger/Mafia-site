@@ -25,6 +25,6 @@ Use these links in your app store listings and in-app.
 
 This repo is public, so Pages is free.
 
-## Before publishing
+## Contact
 
-In `privacy.html` and `terms.html`, replace `privacy@example.com` and `legal@example.com` with your real contact emails.
+Privacy and Terms contact: **vaghblogger@gmail.com**
