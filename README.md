@@ -4,9 +4,9 @@ Public website for the **Mafia** (Werewolf / Mafia host) app — Privacy Policy 
 
 ## URL
 
-- **Site:** https://vaghblogger.github.io/Mafia-Site/
-- **Privacy:** https://vaghblogger.github.io/Mafia-Site/privacy.html
-- **Terms:** https://vaghblogger.github.io/Mafia-Site/terms.html
+- **Site:** https://vaghblogger.github.io/Mafia-site/
+- **Privacy:** https://vaghblogger.github.io/Mafia-site/privacy.html
+- **Terms:** https://vaghblogger.github.io/Mafia-site/terms.html
 
 Use these links in your app store listings and in-app.
 

@@ -17,7 +17,7 @@ In a terminal, from the **Mafia-Site** folder:
 
 ```bash
 cd /Users/vagh/Cursor/Mafia-Site
-git remote add origin https://github.com/vaghblogger/Mafia-Site.git
+git remote add origin https://github.com/vaghblogger/Mafia-site.git
 git branch -M main
 git push -u origin main
 ```
@@ -30,9 +30,9 @@ git push -u origin main
 2. **Settings** → **Pages**
 3. Under **Source**, choose **Deploy from a branch**
 4. **Branch:** `main` → **Folder:** `/ (root)` → **Save**
-5. After a minute, the site will be at: **https://vaghblogger.github.io/Mafia-Site/**
+5. After a minute, the site will be at: **https://vaghblogger.github.io/Mafia-site/**
 
 Use these URLs in Play Console and App Store Connect:
 
-- **Privacy:** https://vaghblogger.github.io/Mafia-Site/privacy.html  
-- **Terms:** https://vaghblogger.github.io/Mafia-Site/terms.html  
+- **Privacy:** https://vaghblogger.github.io/Mafia-site/privacy.html  
+- **Terms:** https://vaghblogger.github.io/Mafia-site/terms.html  
